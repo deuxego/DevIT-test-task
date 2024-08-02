@@ -8,8 +8,10 @@ type Props = {
 
 export const useHomePage = ({ limit }: Props) => {
   const [listItems, setListItems] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = useCallback(async () => {
+    setIsLoading(true);
     try {
       const requests = packRequests(REQUESTS_LIMIT);
 
@@ -30,10 +32,13 @@ export const useHomePage = ({ limit }: Props) => {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   }, [limit]);
 
   return {
+    isLoading,
     listItems,
     handleClick
   };

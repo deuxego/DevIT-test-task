@@ -6,7 +6,7 @@ import { List } from './list';
 
 const HomePage = () => {
   const [limit, setLimit] = useState<number>(10);
-  const { listItems, handleClick } = useHomePage({ limit });
+  const { isLoading, listItems, handleClick } = useHomePage({ limit });
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const value = +e.target.value;
@@ -26,6 +26,7 @@ const HomePage = () => {
           className="relative h-12 w-72 pr-16"
         />
         <Button
+          disabled={isLoading}
           onClick={handleClick}
           className="absolute top-1/2 right-1 transform -translate-y-1/2"
         >
